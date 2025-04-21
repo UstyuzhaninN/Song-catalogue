@@ -98,18 +98,22 @@ void fillSongInfo(Song& song)
     cout << "Введите имя композитора: "; cin.getline(song.composer.name, sizeof(song.composer.name));
     cout << "Введите фамилию композитора: "; cin.getline(song.composer.surname, sizeof(song.composer.surname));
     cout << "Введите год выпуска: "; cin.getline(song.year, sizeof(song.year));
-    int choice = 0;
+    char choice;
+    start:
     cout << "Как вы хотите заполнить текст песни: 1 - загрузить файл с текстом, 2 - ввести текст вручную: ";
     cin >> choice;
     cin.ignore();
     switch (choice)
     {
-    case 1:
+    case '1':
         fillLyricsByFile(song);
         break;
-    case 2:
+    case '2':
         fillLyrics(song);
         break;
+    default:
+        cout << "Попробуйте еще раз." << endl;
+        goto start;
     }
 }
 
@@ -343,9 +347,11 @@ int main()
     //common info
     SongList list;
     list.songs = new Song[list.listSize];
-    int menu;
-    int exit = 1;
-start:
+
+    char menu;
+    char exit = '1';
+    start2:
+    start:
     while (exit)
     {
         cout << "Меню:" << endl << "1. Добавить песню" << endl << "2. Удалить песню" << endl << "3. Редактировать текст песни"
@@ -357,7 +363,7 @@ start:
 
         switch (menu)
         {
-        case 1: {
+        case '1': {
             //song info
             int songAdd = 1;
             while (songAdd)
@@ -371,35 +377,38 @@ start:
             }
             break;
         }
-        case 2: {
+        case '2': {
             deleteSong(list);
             break;
         }
-        case 3: {
+        case '3': {
             editTheLyrics(list);
             break;
         }
-        case 4: {
+        case '4': {
             downloadSong(list);
             break;
         }
-        case 5: {
+        case '5': {
             searchByPerformer(list);
             break;
         }
-        case 6: {
+        case '6': {
             searchByKey(list);
             break;
         }
-        case 7: {
+        case '7': {
             printSongList(list);
             break;
         }
-        case 8: {
+        case '8': {
             exit = 0;
             goto start;
             break;
         }
+        default:
+            cout << "Попробуйте еще раз" << endl;
+            goto start2;
         }
 
         cout << endl << "1 - вернуться в меню, 0 - выйти из программы" << endl;
