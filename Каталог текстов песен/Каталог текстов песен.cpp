@@ -285,7 +285,7 @@ void searchByPerformer(SongList list)
 {
     char performer[50];
     cout << "Введите исполнителя для поиска по исполнителю: ";
-    cin >> performer;
+    cin.getline(performer,50);
     bool isFound = false;
     int i = 0;
 
@@ -311,7 +311,7 @@ void searchByKey(SongList list)
 {
     char keyword[50];
     cout << "Введите ключевое слово для поиска по ключевому слову: ";
-    cin >> keyword;
+    cin.getline(keyword,50);
     bool isFound = false;
     int i = 0;
     for (; i < list.numberOfSongs; i++)
